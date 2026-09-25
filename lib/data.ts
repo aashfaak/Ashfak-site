@@ -7,6 +7,25 @@ import { Project, Idea, ThinkingPost, Trip, Goal } from "./types";
 
 export const projects: Project[] = [
   {
+    slug: "card-matching-memory-game",
+    title: "Card Matching Memory Game",
+    short: "A browser-based memory game where players flip cards and find matching pairs.",
+    category: "Game",
+    imageUrl: "/matching_memory_game.png",
+    technologies: ["HTML", "CSS", "JavaScript"],
+    status: "completed",
+    featured: false,
+    problem: "A quick casual game should be easy to start while still rewarding attention and recall.",
+    ideaText: "Create a simple card-matching game that turns a familiar memory challenge into a polished browser experience.",
+    howItWorks: "Players reveal cards, remember their positions, and match pairs until the board is cleared.",
+    features: ["Interactive card flipping", "Pair matching gameplay", "Play directly in the browser"],
+    challenges: "Keeping card interactions clear and predictable as players reveal and match cards.",
+    learned: "How a small game loop can make a familiar mechanic engaging through simple visual feedback.",
+    future: "Add difficulty levels, a move counter, and a best-time tracker.",
+    github: "",
+    demo: "https://aashfaak.github.io/Card_matching_memory_game/",
+  },
+  {
     slug: "predict-me",
     title: "Predict-Me",
     short: "A machine learning app that predicts outcomes from user-provided data.",
