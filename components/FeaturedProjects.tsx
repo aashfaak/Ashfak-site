@@ -53,7 +53,7 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
               >
                 Open project
               </Link>
-              {project.slug === "predict-me" || project.slug === "neon-flappy-game" || project.slug === "neon-snake-game" || project.slug === "tanim-intesar-portfolio" ? null : project.github ? (
+              {project.slug === "card-matching-memory-game" || project.slug === "predict-me" || project.slug === "neon-flappy-game" || project.slug === "neon-snake-game" || project.slug === "tanim-intesar-portfolio" ? null : project.github ? (
                 <a
                   href={project.github}
                   target="_blank"
