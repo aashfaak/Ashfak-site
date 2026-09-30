@@ -4,7 +4,7 @@ import { thinking } from "@/lib/data";
 export default function Thinking() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
-      <h1 className="font-serif text-3xl">Fragments</h1>
+      <h1 className="font-serif text-3xl">Field Notes</h1>
       <p className="mt-3 max-w-prose text-sm text-muted">
         Random thoughts, half-formed ideas, observations, and everything in between.
       </p>

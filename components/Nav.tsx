@@ -6,12 +6,13 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 const links = [
-  { href: "/about", label: "About" },
+  { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
   { href: "/ideas", label: "Ideas" },
-  { href: "/thinking", label: "Fragments" },
+  { href: "/thinking", label: "Field Notes" },
   { href: "/travel", label: "Travel" },
   { href: "/planning", label: "Planning" },
+  { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
 

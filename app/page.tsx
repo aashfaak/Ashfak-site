@@ -6,10 +6,32 @@ import HeroArt from "@/components/HeroArt";
 import Image from "next/image";
 import { socialLinks } from "@/lib/socials";
 import ContentCarousel from "@/components/ContentCarousel";
+import type { IconType } from "react-icons";
+import {
+  FaEnvelope,
+  FaFacebookF,
+  FaGithub,
+  FaInstagram,
+  FaLinkedinIn,
+  FaTelegram,
+  FaWhatsapp,
+} from "react-icons/fa6";
+
+const socialIcons: Record<string, IconType> = {
+  Email: FaEnvelope,
+  Facebook: FaFacebookF,
+  Instagram: FaInstagram,
+  WhatsApp: FaWhatsapp,
+  Telegram: FaTelegram,
+  GitHub: FaGithub,
+  LinkedIn: FaLinkedinIn,
+};
 
 export default function Home() {
   const profileImage = "/ashfak.jpg";
   const latestThinking = thinking.slice(0, 3);
+  const emailLink = socialLinks.find((social) => social.label === "Email");
+  const otherSocialLinks = socialLinks.filter((social) => social.label !== "Email");
 
   return (
     <div>
@@ -17,7 +39,7 @@ export default function Home() {
       <section className="hero-panel mx-auto grid max-w-5xl items-center gap-10 px-6 pb-16 pt-20 md:grid-cols-[1.1fr_0.9fr] md:gap-6">
         <div className="relative z-10">
           <h1 className="max-w-xl font-serif leading-tight">
-            <span className="block text-5xl text-signal sm:text-6xl">Hi! I&apos;m Ashfak.</span>
+            <span className="block text-5xl text-signal sm:text-6xl">Hi, I&apos;m Ashfak.</span>
             <span className="mt-5 block max-w-lg text-3xl leading-snug text-ink sm:text-4xl">
               A place for the things I build, the ideas I chase, and the places I wander
               <span className="text-clay"> —</span>
@@ -43,29 +65,38 @@ export default function Home() {
             </Link>
           </div>
           <div className="connect-panel mt-8 max-w-xl">
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <p className="text-xs font-medium uppercase tracking-[0.18em] text-signal">Connect with me</p>
-                <p className="mt-1 text-sm text-muted">Whatever you want to talk about, find me here.</p>
-              </div>
-              
-            </div>
-            <nav aria-label="Social media links" className="mt-4 grid grid-cols-3 gap-2 sm:grid-cols-5">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`Open Ashfak on ${social.label}`}
-                  className="social-link group flex items-center gap-2 rounded-xl border border-line bg-white/65 px-2.5 py-2 text-xs text-ink no-underline transition-all hover:-translate-y-0.5 hover:border-signal hover:bg-white"
-                >
-                  <span aria-hidden="true" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-signal text-[10px] font-bold text-paper transition-colors group-hover:bg-signalDeep">
-                    {social.mark}
-                  </span>
-                  <span className="truncate">{social.label}</span>
-                </a>
-              ))}
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-signal">Connect with me</p>
+            <p className="mt-1 text-sm text-muted">Whatever you want to talk about, find me here.</p>
+            {emailLink && (
+              <a
+                href={emailLink.href}
+                aria-label={`Email Ashfak at ${emailLink.href.replace("mailto:", "")}`}
+                className="mt-4 inline-flex items-center gap-2 text-sm text-ink no-underline transition-colors hover:text-signalDeep"
+              >
+                <span aria-hidden="true" className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line bg-white/65 text-signal">
+                  <FaEnvelope size={16} />
+                </span>
+                <span>{emailLink.href.replace("mailto:", "")}</span>
+              </a>
+            )}
+            <nav aria-label="Social media links" className="mt-2 flex flex-wrap gap-2">
+              {otherSocialLinks.map((social) => {
+                const Icon = socialIcons[social.label];
+
+                return (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Open Ashfak on ${social.label}`}
+                    title={social.label}
+                    className="social-link inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-white/65 text-signal no-underline transition-colors hover:border-signal hover:bg-white hover:text-signalDeep"
+                  >
+                    <Icon aria-hidden="true" size={19} />
+                  </a>
+                );
+              })}
             </nav>
           </div>
         </div>
@@ -124,7 +155,7 @@ export default function Home() {
           />
           <ContentCarousel>
             {ideas.map((idea) => (
-              <article key={idea.slug} className="content-card group flex h-[18rem] w-[18rem] max-w-[calc(100vw-3rem)] shrink-0 snap-start flex-col overflow-hidden rounded-2xl p-5 transition-transform hover:-translate-y-1 sm:w-[calc(50%-0.5rem)] lg:w-[calc(28.571%-0.857rem)]">
+              <Link key={idea.slug} href={`/ideas/${idea.slug}`} className="content-card group flex h-[18rem] w-[18rem] max-w-[calc(100vw-3rem)] shrink-0 snap-start flex-col overflow-hidden rounded-2xl p-5 no-underline transition-transform hover:-translate-y-1 sm:w-[calc(50%-0.5rem)] lg:w-[calc(28.571%-0.857rem)]">
                 <div className="relative -mx-5 -mt-5 mb-4 h-40 shrink-0 overflow-hidden rounded-t-2xl bg-clay/10">
                   {idea.imageUrl ? (
                     <Image src={idea.imageUrl} alt={idea.title} fill sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 84vw" className="object-cover" />
@@ -132,18 +163,18 @@ export default function Home() {
                     <span className="flex h-full items-center justify-center font-serif text-3xl text-clay/60">I</span>
                   )}
                 </div>
-                <h3 className="font-serif text-lg group-hover:text-signal">{idea.title}</h3>
-              </article>
+                <h3 className="font-serif text-lg text-ink group-hover:text-signal">{idea.title}</h3>
+              </Link>
             ))}
           </ContentCarousel>
         </div>
       </section>
 
-      {/* Latest fragments */}
+      {/* Latest field notes */}
       <section id="thinking" className="color-band-lilac border-t border-line">
         <div className="mx-auto max-w-5xl px-6 py-16">
           <SectionHeading
-            title="Latest fragments"
+            title="Latest field notes"
             action={
               <Link href="/thinking" className="text-sm text-signal no-underline">
                 View More

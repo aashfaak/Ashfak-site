@@ -1,5 +1,17 @@
+import Link from "next/link";
+import Image from "next/image";
 import { ideas } from "@/lib/data";
 import StatusBadge from "@/components/StatusBadge";
+
+function renderConcept(concept: string) {
+  return concept.split(/(\*\*.*?\*\*)/g).map((part, index) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return <strong key={index}>{part.slice(2, -2)}</strong>;
+    }
+
+    return part;
+  });
+}
 
 export default function Ideas() {
   return (
@@ -11,34 +23,31 @@ export default function Ideas() {
 
       <div className="mt-10 space-y-10">
         {ideas.map((idea) => (
-          <article key={idea.slug} className="border-t border-line pt-8 first:border-t-0 first:pt-0">
-            <div className="flex items-start justify-between gap-4">
-              <h2 className="font-serif text-xl">{idea.title}</h2>
-              <StatusBadge status={idea.status} />
-            </div>
-            <dl className="mt-4 grid gap-4 sm:grid-cols-2">
-              <div>
-                <dt className="text-xs text-muted">What is it?</dt>
-                <dd className="mt-1 text-sm text-ink/80">{idea.what}</dd>
+          <Link key={idea.slug} href={`/ideas/${idea.slug}`} className="group block rounded-2xl border border-line bg-white/60 p-5 no-underline shadow-[0_8px_20px_rgba(27,26,23,0.05)] transition-transform hover:-translate-y-1">
+            <article>
+              <div className="flex items-start justify-between gap-4">
+                <h2 className="font-serif text-xl text-ink transition-colors group-hover:text-signal">{idea.title}</h2>
+                <StatusBadge status={idea.status} />
               </div>
-              <div>
-                <dt className="text-xs text-muted">Why did I think about it?</dt>
-                <dd className="mt-1 text-sm text-ink/80">{idea.why}</dd>
+              <div className="mt-4 grid gap-5 border-t border-line pt-4 sm:grid-cols-[minmax(0,1fr)_14rem] sm:items-start">
+                <section>
+                  <h3 className="text-xs font-semibold uppercase text-muted">Concept</h3>
+                  <p className="mt-1 whitespace-pre-line text-sm leading-relaxed text-ink/80">{renderConcept(idea.concept)}</p>
+                </section>
+                {idea.imageUrl && (
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-line">
+                    <Image
+                      src={idea.imageUrl}
+                      alt={idea.title}
+                      fill
+                      sizes="(min-width: 640px) 224px, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
+                )}
               </div>
-              <div>
-                <dt className="text-xs text-muted">What problem does it solve?</dt>
-                <dd className="mt-1 text-sm text-ink/80">{idea.problem}</dd>
-              </div>
-              <div>
-                <dt className="text-xs text-muted">Who could use it?</dt>
-                <dd className="mt-1 text-sm text-ink/80">{idea.who}</dd>
-              </div>
-              <div className="sm:col-span-2">
-                <dt className="text-xs text-muted">How might it work?</dt>
-                <dd className="mt-1 text-sm text-ink/80">{idea.how}</dd>
-              </div>
-            </dl>
-          </article>
+            </article>
+          </Link>
         ))}
       </div>
     </div>

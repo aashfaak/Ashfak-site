@@ -13,7 +13,7 @@ export default function ThinkingPost({ params }: { params: { slug: string } }) {
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
       <Link href="/thinking" className="text-sm text-muted no-underline">
-        ← All fragments
+        ← All field notes
       </Link>
       <p className="mt-4 text-xs text-muted">{post.category}</p>
       <h1 className="mt-1 font-serif text-3xl">{post.title}</h1>

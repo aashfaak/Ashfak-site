@@ -1,6 +1,6 @@
 # Ashfak — Build · Think · Explore
 
-The public-facing site from your plan: Home, About, Projects, Ideas, Fragments,
+The public-facing site from your plan: Home, About, Projects, Ideas, Field Notes,
 Travel, Planning, Contact. Next.js 14 (App Router) + TypeScript +
 Tailwind CSS. All content currently comes from `lib/data.ts` (mock data) —
 this is the frontend only, ready for you to wire the backend into.
@@ -49,7 +49,7 @@ Open http://localhost:3000
 - To show your portrait in the home hero, place an image named `me.jpg` in
   the `public` folder.
 - `npm install` again first (added the `firebase` package).
-- This is the shell only — per-section editors (Projects, Ideas, Fragments,
+- This is the shell only — per-section editors (Projects, Ideas, Field Notes,
   Travel, Planning, Messages: list + add/edit forms, Draft/Publish)
   aren't built yet; marked with `TODO` in `app/admin/dashboard/page.tsx`.
 

@@ -1,6 +1,7 @@
 const LABELS: Record<string, string> = {
   idea: "Idea",
   researching: "Researching",
+  exploring: "Exploring",
   building: "Building",
   completed: "Completed",
   launched: "Launched",
@@ -12,6 +13,7 @@ const LABELS: Record<string, string> = {
 const DOT: Record<string, string> = {
   idea: "bg-muted",
   researching: "bg-clay",
+  exploring: "bg-clay",
   building: "bg-clay",
   completed: "bg-signal",
   launched: "bg-signal",
