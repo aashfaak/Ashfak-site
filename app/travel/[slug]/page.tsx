@@ -11,7 +11,9 @@ export function generateStaticParams() {
 export default function TravelDetail({ params }: { params: { slug: string } }) {
   const trip = trips.find((item) => item.slug === params.slug);
   if (!trip) return notFound();
-  const tripImages = trip.detailImageUrls ?? [trip.detailImageUrl ?? trip.imageUrl].filter(Boolean);
+  const tripImages = trip.detailImageUrls ?? [trip.detailImageUrl ?? trip.imageUrl].filter(
+    (image): image is string => typeof image === "string",
+  );
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
